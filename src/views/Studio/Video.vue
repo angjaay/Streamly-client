@@ -8,9 +8,6 @@
       <v-tab>
         Uploads
       </v-tab>
-      <v-tab>
-        Live
-      </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
@@ -138,9 +135,6 @@
           </v-card>
         </template>
       </v-tab-item>
-      <v-tab-item>
-        live
-      </v-tab-item>
     </v-tabs-items>
     <!-- </v-row> -->
     <!-- </v-container> -->
@@ -173,8 +167,8 @@ export default {
       },
       { text: "Visibility", value: "status" },
       { text: "Views", value: "views" },
-      { text: "Comments", value: "comments" },
-      { text: "Likes (vs. dislikes)", value: "feelings" },
+      // { text: "Comments", value: "comments" },
+      // { text: "Likes (vs. dislikes)", value: "feelings" },
       { text: "Actions", value: "actions", sortable: false },
     ],
     videos: [],

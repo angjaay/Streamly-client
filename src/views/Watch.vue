@@ -53,46 +53,7 @@
                         {{ video.views }} views<v-icon>mdi-circle-small</v-icon
                         >{{ dateFormatter(video.createdAt) }}
                       </v-card-subtitle>
-                      <v-card-actions class="pt-0 pl-0">
-                        <v-btn text @click="createFeeling('like')"
-                          ><v-icon
-                            :class="
-                              `pr-2${
-                                feeling !== 'like'
-                                  ? ' grey--text text--darken-1'
-                                  : ''
-                              }`
-                            "
-                            >mdi-thumb-up</v-icon
-                          >{{ video.likes }}</v-btn
-                        >
-
-                        <v-btn text @click="createFeeling('dislike')"
-                          ><v-icon
-                            :class="
-                              `pr-2${
-                                feeling !== 'dislike'
-                                  ? ' grey--text text--darken-1'
-                                  : ''
-                              }`
-                            "
-                            >mdi-thumb-down</v-icon
-                          >
-                          {{ video.dislikes }}</v-btn
-                        >
-                        <v-btn
-                          :href="`${url}/uploads/videos/${video.url}`"
-                          text
-                          class="grey--text text--darken-1"
-                          ><v-icon>mdi-download</v-icon> Download</v-btn
-                        >
-                        <!-- <v-btn text class="grey--text text--darken-1"
-                          ><v-icon>mdi-share</v-icon> Share</v-btn
-                        >
-                        <v-btn text class="grey--text text--darken-1"
-                          ><v-icon>mdi-playlist-plus</v-icon> Save</v-btn
-                        > -->
-                      </v-card-actions>
+                      
                     </div>
                   </v-card>
 
@@ -129,77 +90,14 @@
                               class="font-weight-medium mb-1"
                               >{{ video.userId.channelName }}</v-list-item-title
                             >
-                            <v-list-item-subtitle
+                            <!-- <v-list-item-subtitle
                               >{{ video.userId.subscribers }} subscriber
-                            </v-list-item-subtitle>
+                            </v-list-item-subtitle> -->
                           </v-list-item-content>
                         </v-list-item>
                       </v-card>
                     </v-col>
-                    <v-col cols="12" sm="6" md="4" lg="4">
-                      <div
-                        class="d-flex justify-end align-center"
-                        v-if="typeof video.userId !== 'undefined'"
-                      >
-                        <v-btn
-                          v-if="
-                            currentUser && video.userId._id !== currentUser._id
-                          "
-                          :class="[
-                            { 'red white--text': !subscribed },
-                            {
-                              'grey grey--text lighten-3 text--darken-3': subscribed
-                            },
-                            'mt-6'
-                          ]"
-                          tile
-                          large
-                          depressed
-                          :loading="subscribeLoading"
-                          @click="subscribe"
-                          >{{ !subscribed ? 'subscribe' : 'disubscribe' }}</v-btn
-                        >
-
-                        <v-btn
-                          v-else-if="showSubBtn"
-                          :class="[
-                            { 'red white--text': !subscribed },
-                            {
-                              'grey grey--text lighten-3 text--darken-3': subscribed
-                            },
-                            'mt-6'
-                          ]"
-                          tile
-                          large
-                          depressed
-                          :loading="subscribeLoading"
-                          @click="subscribe"
-                          >{{ !subscribed ? 'subscribe' : 'disubscribe' }}</v-btn
-                        >
-
-                        <!-- <v-btn
-                          v-if="
-                            video.userId && video.userId._id !== currentUser._id
-                          "
-                          :class="[
-                            { 'red white--text': !subscribed },
-                            {
-                              'grey grey--text lighten-3 text--darken-3': subscribed
-                            },
-                            'mt-6'
-                          ]"
-                          tile
-                          large
-                          depressed
-                          :loading="subscribeLoading"
-                          @click="subscribe"
-                          >{{ !subscribed ? 'subscribe' : 'subscribed' }}</v-btn
-                        > -->
-                        <!-- <v-btn icon class="ml-5 mt-6"
-                          ><v-icon>mdi-bell</v-icon></v-btn
-                        > -->
-                      </div>
-                    </v-col>
+                    
                     <v-col class="pl-11" offset="1" cols="11" md="11">
                       <p>
                         {{
@@ -216,20 +114,7 @@
                 </div>
               </v-skeleton-loader>
 
-              <v-row>
-                <v-col v-if="video && video.status === 'public'">
-                  <p class="mb-0">{{ video.comments }} Komentar</p>
 
-                  <AddComment
-                    @videoCommentLength="video.comments++"
-                    :videoId="video._id"
-                  />
-                  <CommentList
-                    @videoCommentLength="video.comments--"
-                    :videoId="video._id"
-                  />
-                </v-col>
-              </v-row>
             </v-col>
 
             <v-col cols="12" sm="12" md="4" lg="4">
@@ -344,8 +229,8 @@ import FeelingService from '@/services/FeelingService'
 import HistoryService from '@/services/HistoryService'
 
 import SigninModal from '@/components/SigninModal'
-import AddComment from '@/components/comments/AddComment'
-import CommentList from '@/components/comments/CommentList'
+// import AddComment from '@/components/comments/AddComment'
+// import CommentList from '@/components/comments/CommentList'
 
 
 export default {
@@ -474,87 +359,6 @@ export default {
       if (feeling.data.data.feeling === 'like') this.feeling = 'like'
       else if (feeling.data.data.feeling === 'dislike') this.feeling = 'dislike'
     },
-    async createFeeling(type) {
-      if (!this.isAuthenticated) {
-        this.signinDialog = true
-        this.details = {
-          title:
-            type === 'like' ? 'Like this video?' : "Don't like this video?",
-          text: 'Sign in to make your opinion count.'
-        }
-        return
-      }
-      switch (true) {
-        case type === 'like' && this.feeling === '':
-          this.feeling = 'like'
-          this.video.likes++
-          // console.log('new like')
-          break
-        case type === 'like' && this.feeling === type:
-          this.feeling = ''
-          this.video.likes--
-          // console.log('remove like')
-          break
-        case type === 'like' && this.feeling === 'dislike':
-          this.feeling = 'like'
-          this.video.dislikes--
-          this.video.likes++
-          // console.log('change to like')
-          break
-        case type === 'dislike' && this.feeling === '':
-          this.feeling = 'dislike'
-          this.video.dislikes++
-          // console.log('new dislike')
-          break
-        case type === 'dislike' && this.feeling === type:
-          this.feeling = ''
-          this.video.dislikes--
-          // console.log('remove dislike')
-          break
-        case type === 'dislike' && this.feeling === 'like':
-          this.feeling = 'dislike'
-          this.video.likes--
-          this.video.dislikes++
-        // console.log('change to dislike')
-      }
-
-      const feeling = await FeelingService.createFeeling({
-        videoId: this.video._id,
-        type
-      }).catch((err) => {
-        console.log(err)
-      })
-
-      if (!feeling) return
-    },
-    async subscribe() {
-      if (!this.isAuthenticated) {
-        this.signinDialog = true
-        this.details = {
-          title: 'Want to subscribe to this channel?',
-          text: 'Sign in to subscribe to this channel.'
-        }
-        return
-      }
-      this.subscribeLoading = true
-      const sub = await SubscriptionService.createSubscription({
-        channelId: this.video.userId._id
-      })
-        .catch((err) => console.log(err))
-        .finally(() => {
-          this.subscribeLoading = false
-        })
-
-      if (!sub) return
-
-      if (!sub.data.data._id) {
-        this.subscribed = false
-        this.video.userId.subscribers--
-      } else {
-        this.subscribed = true
-        this.video.userId.subscribers++
-      }
-    },
     async updateViews(id) {
       const views = await VideoService.updateViews(id).catch((err) => {
         console.log(err)
@@ -589,8 +393,8 @@ export default {
     }
   },
   components: {
-    AddComment,
-    CommentList,
+    // AddComment,
+    // CommentList,
     SigninModal,
     InfiniteLoading
   },

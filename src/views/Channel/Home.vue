@@ -34,46 +34,15 @@
                       <v-list-item-title class="headline mb-1">{{
                         channel.channelName
                       }}</v-list-item-title>
-                      <v-list-item-subtitle
+                      <!-- <v-list-item-subtitle
                         >{{ channel.subscribers }} subscribers
-                      </v-list-item-subtitle>
+                      </v-list-item-subtitle> -->
                     </v-list-item-content>
                   </v-list-item>
                 </v-card>
               </v-skeleton-loader>
             </v-col>
-            <v-col cols="12" sm="5" md="3" lg="3" v-if="!loading">
-              <v-btn
-                v-if="currentUser && channel._id !== currentUser._id"
-                :class="[
-                  { 'red white--text': !subscribed },
-                  { 'grey grey--text lighten-3 text--darken-3': subscribed },
-                  'mt-6'
-                ]"
-                tile
-                large
-                depressed
-                :loading="subscribeLoading"
-                @click="subscribe"
-                >{{ !subscribed ? 'subscribe' : 'subscribed' }}</v-btn
-              >
-              <!-- <template v-else-if="!currentUser" -->
-              <v-btn
-                v-else-if="showSubBtn"
-                :class="[
-                  { 'red white--text': !subscribed },
-                  { 'grey grey--text lighten-3 text--darken-3': subscribed },
-                  'mt-6'
-                ]"
-                tile
-                large
-                depressed
-                :loading="subscribeLoading"
-                @click="subscribe"
-                >{{ !subscribed ? 'subscribe' : 'subscribed' }}</v-btn
-              >
-              <!-- <v-btn icon class="ml-5 mt-6"><v-icon>mdi-bell</v-icon></v-btn> -->
-            </v-col>
+           
           </v-row>
         </v-container>
       </div>
@@ -172,7 +141,7 @@ export default {
     subscribeLoading: false,
     showSubBtn: true,
     url: process.env.VUE_APP_URL,
-    items: ['Home', 'Videos', 'Playlists', 'Community', 'Channels', 'about'],
+    items: ['Videos'],
     videos: {},
     channel: {},
     signinDialog: false,

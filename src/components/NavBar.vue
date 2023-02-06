@@ -33,7 +33,7 @@
           </v-tooltip>
         </template>
         <v-list>
-          <v-list-item router to="/studio">
+          <v-list-item router to="/studio/videos">
             <v-list-item-icon class="mr-3"
               ><v-icon>mdi-play-box-outline</v-icon></v-list-item-icon
             >
@@ -135,7 +135,7 @@
               </v-list-item-icon>
               <v-list-item-title>Channel kamu</v-list-item-title>
             </v-list-item>
-            <v-list-item router to="/studio">
+            <v-list-item router to="/studio/videos">
               <v-list-item-icon>
                 <v-icon>mdi-youtube-studio</v-icon>
               </v-list-item-icon>
@@ -288,114 +288,7 @@ export default {
         header: null,
         pages: [
           { title: 'Beranda', link: '/', icon: 'mdi-home' },
-          { title: 'Trending', link: '/trending', icon: 'mdi-fire' },
-          {
-            title: 'Langganan',
-            link: '/subscriptions',
-            icon: 'mdi-youtube-subscription'
-          }
-        ]
-      },
-      {
-        header: null,
-        pages: [
-          // {
-          //   title: 'Library',
-          //   link: '#l',
-          //   icon: 'mdi-play-box-multiple'
-          // },
-          {
-            title: 'Histori',
-            link: '/history',
-            icon: 'mdi-history'
-          },
-          // {
-          //   title: 'Your videos',
-          //   link: '#yv',
-          //   icon: 'mdi-play-box-outline'
-          // },
-
-          // {
-          //   title: 'Watch later',
-          //   link: '#wl',
-          //   icon: 'mdi-clock'
-          // },
-
-          {
-            title: 'Video Disukai',
-            link: '/liked-videos',
-            icon: 'mdi-thumb-up'
-          }
-        ]
-      },
-      {
-        header: 'Langganan',
-        pages: [
-          // {
-          //   title: 'Traversy Media',
-          //   link: '#tm',
-          //   icon: 'mdi-badge-account'
-          // },
-          // {
-          //   title: 'The New Boston',
-          //   link: '#tn',
-          //   icon: 'mdi-badge-account'
-          // },
-          // {
-          //   title: 'Net Ninija',
-          //   link: '#nn',
-          //   icon: 'mdi-badge-account'
-          // },
-          // {
-          //   title: 'Chris Hawks',
-          //   link: '#ch',
-          //   icon: 'mdi-badge-account'
-          // }
-        ]
-      },
-      {
-        header: 'Lainnya dari Streamly',
-        pages: [
-          {
-            title: 'Streamly Premium',
-            link: '#vp',
-            icon: 'mdi-youtube'
-          },
-          {
-            title: 'Gaming',
-            link: '#g',
-            icon: 'mdi-youtube-gaming'
-          },
-          {
-            title: 'Langsung',
-            link: '#li',
-            icon: 'mdi-access-point'
-          }
-        ]
-      },
-      {
-        header: null,
-        pages: [
-          {
-            title: 'Pengaturan',
-            link: '#sg',
-            icon: 'mdi-cog'
-          },
-          {
-            title: 'Anggota Streamly',
-            link: '#rh',
-            icon: 'mdi-account-group-outline'
-          },
-          // {
-          //   title: 'Help',
-          //   link: '#hp',
-          //   icon: 'mdi-help-circle'
-          // },
-          // {
-          //   title: 'Send feedback',
-          //   link: '#f',
-          //   icon: 'mdi-message-alert'
-          // }
+          { title: 'Rekomendasi', link: '/trending', icon: 'mdi-fire' },
         ]
       }
     ],
