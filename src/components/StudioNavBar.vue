@@ -4,7 +4,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="font-weight-bold"
         ><router-link
-          to="/studio"
+          to="/studio/videos"
           class="black--text"
           style="text-decoration: none"
           >Studio</router-link
@@ -261,7 +261,6 @@ export default {
       {
         header: 'scroll',
         pages: [
-          { title: 'Dashboard', link: '/studio', icon: 'mdi-view-dashboard' },
           {
             title: 'Video',
             link: '/studio/videos',
@@ -307,16 +306,6 @@ export default {
             title: 'Pengaturan',
             link: '',
             icon: 'mdi-cog'
-          },
-          {
-            title: 'Kirim umpan balik',
-            link: '#sf',
-            icon: 'mdi-history'
-          },
-          {
-            title: 'Creator Studio Classic',
-            link: '#cs',
-            icon: 'mdi-play-box-outline'
           }
         ]
       }
@@ -335,7 +324,7 @@ export default {
       this.dialog = true
     },
     settingsMoal(title) {
-      if (title !== 'Settings') return
+      if (title !== 'Pengaturan') return
       this.settingsDialog = true
     }
   },

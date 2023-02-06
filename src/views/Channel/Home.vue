@@ -172,7 +172,7 @@ export default {
     subscribeLoading: false,
     showSubBtn: true,
     url: process.env.VUE_APP_URL,
-    items: ['Home', 'Videos', 'Playlists', 'Community', 'Channels', 'about'],
+    items: ['Videos'],
     videos: {},
     channel: {},
     signinDialog: false,
